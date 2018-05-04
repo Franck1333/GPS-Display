@@ -1,0 +1,5 @@
+Etape par Etape :
+
+1. Recuperation des Données GPS 		- FONCTIONNE
+2. Determiner la Ville par les données GPS	- FONCTIONNE
+3. Recherche de la Météo par la Ville determinée- EN DEVELLOPEMENT
