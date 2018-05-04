@@ -81,7 +81,7 @@ def parse_GPRMC(data):
 
 #-------------------------------
 def determine():
-    gmaps = googlemaps.Client(key='AIzaSyCbcLmcGDUQlhvZhAkdE0IUFh90rjJ7rrw') #Cle d'acces A.P.I
+    gmaps = googlemaps.Client(key='*') #Cle d'acces A.P.I
 
 # Look up an address with reverse geocoding
     reverse_geocode_result = gmaps.reverse_geocode((Decimal_latitude, Decimal_longitude)) #Envoie et Recuperation des Donnees
