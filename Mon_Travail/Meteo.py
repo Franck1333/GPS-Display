@@ -34,11 +34,11 @@ owm = pyowm.OWM('7435ea1b7ee5e31fe1f524a922202510',language = "fr")
 # lat=22.57W, lon=43.12S (Rio de Janeiro, BR)
 
 #----------------------------------------------------------------------------------------------------------------------------
-meteo() #MAIN DU FICHIER Recuperation_Determination.py
+meteo() #METEO DU FICHIER Recuperation_Determination.py
 observation = owm.weather_at_coords(retourne_latitude(),retourne_longitude())     #Recuperation des Coordonnees du lieu cible
 z = observation.get_weather()                           #Obtention des donnees meteorologique via les coordonees
-#print(z)                                               #Affichage du Status de l'état de la Meteo et du reference temporelle                      
-z.get_temperature('celsius')                            #Enregistrement des variables de température dans un objet
+#print(z)                                               #Affichage du Status de l'Ã©tat de la Meteo et du reference temporelle                      
+z.get_temperature('celsius')                            #Enregistrement des variables de tempÃ©rature dans un objet
 print("La Temperature actuel est de:", z.get_temperature('celsius')['temp'])             #Selection des informations voulu
 #----------------------------------------------------------------------------------------------------------------------------
 
