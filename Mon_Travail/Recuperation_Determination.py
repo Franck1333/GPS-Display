@@ -17,12 +17,11 @@ import json
 import googlemaps #pip install -U googlemaps
 from datetime import datetime
 
-ser = serial.Serial('/dev/ttyACM0',4800,timeout=1) # Open Serial port Configure le Recepteur G.P.S 
+ser = serial.Serial('/dev/ttyACM0',4800,timeout=1) # Open Serial port Configure le Recepteur G.P.S
 
 #Recuparation des informations de la Trame GPRMC contenant les coordonnees GPS principales
-
-
 # Helper function to take HHMM.SS, Hemisphere and make it decimal:
+#-------------------------------
 def degrees_to_decimal(data, hemisphere):
     try:
         decimalPointPosition = data.index('.')
@@ -35,8 +34,9 @@ def degrees_to_decimal(data, hemisphere):
             return -output
     except:
         return ""
+#-------------------------------    
 # Helper function to take a $GPRMC sentence, and turn it into a Python dictionary.
-def parse_GPRMC(data):
+def parse_GPRMC(data):    
     data = data.split(',')
     dict = {
             'Temps_Capture': data[1],
@@ -69,16 +69,28 @@ def parse_GPRMC(data):
     Decimal_latitude = dict['decimal_latitude']   #DICTIONNAIRE VARIABLE LATITUDE CONVERTIS
     Decimal_longitude = dict['decimal_longitude'] #DICTIONNAIRE VARIABLE LONGITUDE CONVERTIS
     
-    return Validite
-    return Latitude
-    return Longitude
-
-    return Decimal_latitude  #RETOURNE LA VARIABLE CONVERTIS LATITUDE
-    return Decimal_longitude #RETOURNE LA VARIABLE CONVERTIS LONGITUDE
+   # return Validite
+   # return Latitude
+   # return Longitude
+   
+    return Decimal_latitude,Decimal_longitude #RETOURNE LES VARIABLES CONVERTIS LATITUDE,LONGITUDE
     
-    return dict #Retourne le dictionnaire principale
+   #return dict #Retourne le dictionnaire principale
+#-------------------------------
 
+#-------------------------------
+def retourne_latitude():
+    
+    Retourne_latitude = Decimal_latitude #Initialisation de la nouvelle variable à la Latitude pour le partage avec un autre fichier python
+    
+    return Retourne_latitude #Retourne la nouvelle Valeur LATITUDE   
+#-------------------------------
+#-------------------------------
+def retourne_longitude():
+        
+    Retourne_longitude = Decimal_longitude #Initialisation de la nouvelle variable à la Longitude pour le partage avec un autre fichier python
 
+    return Retourne_longitude #Retourne la nouvelle Valeur LONGITUDE
 #-------------------------------
 def determine():
     gmaps = googlemaps.Client(key='AIzaSyCbcLmcGDUQlhvZhAkdE0IUFh90rjJ7rrw') #Cle d'acces A.P.I
@@ -104,10 +116,16 @@ def determine():
     return reverse_geocode_result #RETOURNE LA LOCALISATION OBTENUE AU FORMAT JSON
 #-------------------------------
 
-#---MAIN---
+#-------------------------------
+def meteo():
+    line = ser.readline() #Lecture de la liason serie Ligne par Ligne
 
-#BOUCLE
-while True:
+    if "$GPRMC" in line: #SELECTION DE LA LIGNE GPRMC
+        gpsData = parse_GPRMC(line) #ENREGISTREMENT DES DONNEES GPS DANS LA VARIABLE Globale 'gpsData'
+#-------------------------------        
+
+#---MAIN---
+def main():
     line = ser.readline() #Lecture de la liason serie Ligne par Ligne
 
     if "$GPRMC" in line: #SELECTION DE LA LIGNE GPRMC
@@ -116,4 +134,6 @@ while True:
         print(Decimal_latitude)  #AFFICHAGE DE LA VARIABLE CONVERTIS LATITUDE
         print(Decimal_longitude) #AFFICHAGE DE LA VARIABLE CONVERTIS LONGITUDE
         determine(); #FONCTION PERMETTANT DE DETERMINER LA LOCALISATION GRACE AU G.P.S
-   
+
+if __name__ == "__main__":
+    main()   
