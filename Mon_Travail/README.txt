@@ -18,7 +18,8 @@ SOFTWARE :
 		- from urllib2 import urlopen
 		 #from urllib.request import urlopen
 		-json
-		-googlemaps (pip install -U googlemaps)
+		-googlemaps (API GOOGLEMAPS pip install -U googlemaps)
 		-datetime
+		-pyowm (API METEO)
 
 	- Raspian Wheezy/Strentch ou ultérieur
