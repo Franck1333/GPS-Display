@@ -23,3 +23,9 @@ SOFTWARE :
 		-pyowm (API METEO)
 
 	- Raspian Wheezy/Strentch ou ultérieur
+	
+Display'O'Tron 3000
+	- Repertoire 'plugins'
+	- Repertoire 'utils'
+	- Fichier 'dot3k.cfg'
+	- Repertoire 'library'

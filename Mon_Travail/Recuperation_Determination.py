@@ -113,11 +113,43 @@ def determine():
     print (resultat_Ville) #JSON Parse (trie)
     
     return resultat_Ville #RETOURNE LE STRING DE LA LOCALISATION DETERMINE
-    return reverse_geocode_result #RETOURNE LA LOCALISATION OBTENUE AU FORMAT JSON
+    #return reverse_geocode_result #RETOURNE LA LOCALISATION OBTENUE AU FORMAT JSON
+#-------------------------------
+
+#-------------------------------
+#NOUS INDICONS UNIQUEMENT LA VILLE ICI
+def determine_less():
+    gmaps = googlemaps.Client(key='AIzaSyCbcLmcGDUQlhvZhAkdE0IUFh90rjJ7rrw') #Cle d'acces A.P.I
+
+# Look up an address with reverse geocoding
+    reverse_geocode_result = gmaps.reverse_geocode((Decimal_latitude, Decimal_longitude)) #Envoie et Recuperation des Donnees
+
+#Accessing the needed part of the response
+#reverse_geocode_result[0] # This is a dict
+#reverse_geocode_result[0]['address_components'][3]['long_name'] # Return La Region
+#reverse_geocode_result[0]['address_components'][4]['long_name'] # Return country 
+#reverse_geocode_result[0]['address_components'][2]['long_name'] # Return sublocality
+#reverse_geocode_result[0]['address_components'][1]['long_name'] # Return route
+#reverse_geocode_result[0]['address_components'][0]['long_name'] # Return street number
+    
+    print("Ici c'est :")
+    #print(reverse_geocode_result) Format JSON
+
+    resultat_Ville_less = reverse_geocode_result[0]['address_components'][2]['long_name'] #STRING LOCALISATION DETERMINE
+    print (resultat_Ville_less) #JSON Parse (trie)
+    
+    return resultat_Ville_less #RETOURNE LE STRING DE LA LOCALISATION DETERMINE
+    #return reverse_geocode_result #RETOURNE LA LOCALISATION OBTENUE AU FORMAT JSON
 #-------------------------------
 
 #-------------------------------
 def meteo():
+    line = ser.readline() #Lecture de la liason serie Ligne par Ligne
+
+    if "$GPRMC" in line: #SELECTION DE LA LIGNE GPRMC
+        gpsData = parse_GPRMC(line) #ENREGISTREMENT DES DONNEES GPS DANS LA VARIABLE Globale 'gpsData'
+#-------------------------------
+def recup_affichage():
     line = ser.readline() #Lecture de la liason serie Ligne par Ligne
 
     if "$GPRMC" in line: #SELECTION DE LA LIGNE GPRMC

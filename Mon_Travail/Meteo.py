@@ -40,8 +40,11 @@ def main_meteo():
     observation = owm.weather_at_coords(retourne_latitude(),retourne_longitude())     #Recuperation des Coordonnees du lieu cible
     z = observation.get_weather()                           #Obtention des donnees meteorologique via les coordonees
     #print(z)                                               #Affichage du Status de l'état de la Meteo et du reference temporelle                      
-    z.get_temperature('celsius')                            #Enregistrement des variables de température dans un objet
+    z.get_temperature('celsius')['temp']                   #Enregistrement des variables de température dans un objet
+    dot3k = z.get_temperature('celsius')['temp']                    #Stockage de la temperature dans une variable dot3k
     print("La Temperature actuel est de:", z.get_temperature('celsius')['temp'])             #Selection des informations voulu
+
+    return dot3k
     #----------------------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
