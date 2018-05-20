@@ -12,7 +12,7 @@ import pyowm
 
 
 print("""
-Ce fichier va afficher sur le DOT3K, la temperature exterieur de la ZONE dont la valeur a été recuperer par d'autre fichier pythons.
+Ce fichier va afficher sur le DOT3K, la temperature ambiante de la ZONE.
 """)
 
 
@@ -25,7 +25,7 @@ def meteo_dot3k():
     lcd.clear()                     #Nettoyage de la Zone Affichable
     
     lcd.set_cursor_position(0,0)    #Positionnement du Curseur à la colonne 0 et ligne 0
-    lcd.write("Temp EXT:")          #Affichage du String entre guillemet
+    lcd.write("Temp Ambiante:")          #Affichage du String entre guillemet
     
     lcd.set_cursor_position(0,1)    #Positionnement du Curseur à la colonne 0 et ligne 1
     lcd.write(str(temp))            #Affichage de la valeur convertis de FLOAT à STRING via une valeur retourné qui a stocker dans une variable

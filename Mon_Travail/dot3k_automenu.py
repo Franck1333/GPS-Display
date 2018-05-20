@@ -8,17 +8,17 @@ import dot3k.lcd as lcd
 import time
 
 print("""
-Ce fichier va afficher sur le DOT3K, les valeurs des autre fichier pythons.
+Ce fichier va afficher sur le DOT3K, Le Menu.
 """)
 
 while True:
 
     print("""
-    Ce fichier va afficher sur le DOT3K, les valeurs des autre fichier pythons.
+    Demarrage ordonee des Fonctions.
     """)
     
     time.sleep(13)
     determination_dot3k()
-    time.sleep(50)
+    time.sleep(13)
     meteo_dot3k()
     time.sleep(1)
