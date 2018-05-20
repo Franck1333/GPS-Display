@@ -26,6 +26,7 @@ def determination_dot3k():
     
     lcd.set_cursor_position(0,1)    #Positionnement du Curseur à la colonne 0 et ligne 1
     lcd.write(ville)            #Affichage de la valeur convertis de FLOAT à STRING via une valeur retourné qui a stocker dans une variable
+    #return lcd.write(ville)            #Affichage de la valeur convertis de FLOAT à STRING via une valeur retourné qui a stocker dans une variable
 
 if __name__ == "__main__":
     determination_dot3k() #Fonction Affichage sur le DOT3K

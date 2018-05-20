@@ -29,6 +29,7 @@ def meteo_dot3k():
     
     lcd.set_cursor_position(0,1)    #Positionnement du Curseur à la colonne 0 et ligne 1
     lcd.write(str(temp))            #Affichage de la valeur convertis de FLOAT à STRING via une valeur retourné qui a stocker dans une variable
+    #return lcd.write(str(temp))            #Affichage de la valeur convertis de FLOAT à STRING via une valeur retourné qui a stocker dans une variable
 #-----------------------------------------------------------------------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------
