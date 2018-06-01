@@ -1,4 +1,4 @@
-Pour que ce projet fonctionne on a besoin : 
+﻿Pour que ce projet fonctionne on a besoin : 
 
 HARDWARE :	
 
@@ -25,6 +25,8 @@ SOFTWARE :
 	- Raspian Wheezy/Strentch ou ultérieur
 	
 Display'O'Tron 3000
+	- Github : https://github.com/pimoroni/displayotron
+	- Setup : curl -sS get.pimoroni.com/displayotron | bash
 	- Repertoire 'plugins'
 	- Repertoire 'utils'
 	- Fichier 'dot3k.cfg'
