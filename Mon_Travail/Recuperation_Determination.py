@@ -17,6 +17,8 @@ import json
 import googlemaps #pip install -U googlemaps
 from datetime import datetime
 
+import dot3k.lcd as lcd
+
 ser = serial.Serial('/dev/ttyACM0',4800,timeout=1) # Open Serial port Configure le Recepteur G.P.S
 
 #Recuparation des informations de la Trame GPRMC contenant les coordonnees GPS principales
@@ -62,20 +64,52 @@ def parse_GPRMC(data):
     global Decimal_latitude    #VARIABLE GLOBAL CONVERTIS LATITUDE
     global Decimal_longitude   #VARIABLE GLOBAL CONVERTIS LONGITUDE
 
-    Validite = dict['Validite']	
+    Validite = dict['Validite']
     Latitude = dict['Latitude']
     Longitude = dict['Longitude']
 
     Decimal_latitude = dict['decimal_latitude']   #DICTIONNAIRE VARIABLE LATITUDE CONVERTIS
     Decimal_longitude = dict['decimal_longitude'] #DICTIONNAIRE VARIABLE LONGITUDE CONVERTIS
-    
-   # return Validite
-   # return Latitude
-   # return Longitude
-   
-    return Decimal_latitude,Decimal_longitude #RETOURNE LES VARIABLES CONVERTIS LATITUDE,LONGITUDE
+      
+    return Decimal_latitude,Decimal_longitude,Validite #RETOURNE LES VARIABLES CONVERTIS LATITUDE,LONGITUDE
     
    #return dict #Retourne le dictionnaire principale
+#-------------------------------
+
+#-------------------------------
+def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
+
+    #Cette fonction va verifie la conformite de la Trame NMEA reçu par le Stick GPS et relance le Menu Principal si une erreur est detecte en testant la variable 'Validite'
+
+    if Validite == 'A':                 #Si la variable est valide alors...
+        print(Validite)                 #Affichage de la Variable "Validite" dans la console
+        print("Trame NMEA Valide")      #Affichage du String entre guillemet
+        print("Signal GPS Obtenue")     #Affichage du String entre guillemet
+        pass #<--
+
+    else :                              #Sinon alors...
+        print(Validite)                                     #Affichage de la Variable "Validite" dans la console
+        print("Trame NMEA NON VALIDE")                      #Affichage du String entre guillemet
+        print("Signal GPS Perdue")                          #Affichage du String entre guillemet
+        print("Redemarrage en cours du Programme MENU PRINCIPAL")
+
+        #DOT3K CHECK ERROR DISPLAY --DEBUT--
+        lcd.clear()                     #Nettoyage de la Zone Affichable
+
+        lcd.set_cursor_position(0,0)    #Positionnement du Curseur à la colonne 0 et ligne 0
+        lcd.write("Trame NON VALIDE")   #Affichage du String entre guillemet
+        
+        lcd.set_cursor_position(0,1)    #Positionnement du Curseur à la colonne 0 et ligne 1
+        lcd.write("Signal GPS Perdue")  #Affichage du String entre guillemet
+
+        lcd.set_cursor_position(0,2)        #Positionnement du Curseur à la colonne 0 et ligne 1
+        lcd.write("Restart en cours...")    #Affichage du String entre guillemet        
+        #DOT3K CHECK ERROR DISPLAY --FIN--
+
+        #Execution du fichier MENU 'dot3k_automenu.py'
+        time.sleep(13)
+        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--            
+
 #-------------------------------
 
 #-------------------------------
@@ -94,6 +128,8 @@ def retourne_longitude():
 #-------------------------------
 def determine():
     gmaps = googlemaps.Client(key='AIzaSyCbcLmcGDUQlhvZhAkdE0IUFh90rjJ7rrw') #Cle d'acces A.P.I
+
+    etat_trame() #Validation de la conformite de la Trame NMEA <--
 
 # Look up an address with reverse geocoding
     reverse_geocode_result = gmaps.reverse_geocode((Decimal_latitude, Decimal_longitude)) #Envoie et Recuperation des Donnees
@@ -121,16 +157,10 @@ def determine():
 def determine_less():
     gmaps = googlemaps.Client(key='AIzaSyCbcLmcGDUQlhvZhAkdE0IUFh90rjJ7rrw') #Cle d'acces A.P.I
 
+    etat_trame() #Validation de la conformite de la Trame NMEA <--
+
 # Look up an address with reverse geocoding
     reverse_geocode_result = gmaps.reverse_geocode((Decimal_latitude, Decimal_longitude)) #Envoie et Recuperation des Donnees
-
-#Accessing the needed part of the response
-#reverse_geocode_result[0] # This is a dict
-#reverse_geocode_result[0]['address_components'][3]['long_name'] # Return La Region
-#reverse_geocode_result[0]['address_components'][4]['long_name'] # Return country 
-#reverse_geocode_result[0]['address_components'][2]['long_name'] # Return sublocality
-#reverse_geocode_result[0]['address_components'][1]['long_name'] # Return route
-#reverse_geocode_result[0]['address_components'][0]['long_name'] # Return street number
     
     print("Ici c'est :")
     #print(reverse_geocode_result) Format JSON
