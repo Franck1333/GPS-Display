@@ -15,9 +15,15 @@ from urllib2 import urlopen
 #from urllib.request import urlopen
 import json
 import googlemaps #pip install -U googlemaps
-from datetime import datetime
+import datetime
 
 import dot3k.lcd as lcd
+
+#---DEBUT---Variables Par Défault---
+Validite = None
+Decimal_latitude = None
+Decimal_longitude = None
+#---FIN---Variables Par Défault---
 
 ser = serial.Serial('/dev/ttyACM0',4800,timeout=1) # Open Serial port Configure le Recepteur G.P.S
 
@@ -67,7 +73,7 @@ def parse_GPRMC(data):
     Validite = dict['Validite']
     Latitude = dict['Latitude']
     Longitude = dict['Longitude']
-
+    
     Decimal_latitude = dict['decimal_latitude']   #DICTIONNAIRE VARIABLE LATITUDE CONVERTIS
     Decimal_longitude = dict['decimal_longitude'] #DICTIONNAIRE VARIABLE LONGITUDE CONVERTIS
       
@@ -79,28 +85,117 @@ def parse_GPRMC(data):
 #-------------------------------
 def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
 
-    #Cette fonction va verifie la conformite de la Trame NMEA reçu par le Stick GPS et relance le Menu Principal si une erreur est detecte en testant la variable 'Validite'
+    #OBTENTION DE L'HEURE ACTUEL sous format HEURE,MINUTE,SECONDE
+    #-- DEBUT -- Heure,Minute,Seconde
+    tt = time.time()
+    system_time = datetime.datetime.fromtimestamp(tt).strftime('%H:%M:%S')
+    #print (system_time)
+    #-- FIN -- Heure,Minute,Seconde
 
-    if Validite == 'A':                 #Si la variable est valide alors...
+    #Zone de TEST --DEBUT--
+    #Validite_valid = isinstance(Validite,str) #<-- TEST
+    Decimal_latitude_valid = isinstance(Decimal_latitude,float) #<-- TEST
+    Decimal_longitude_valid = isinstance(Decimal_longitude,float) #<-- TEST
+    #Zone de TEST --FIN--
+
+
+    #Cette fonction va verifie la conformite de la Trame NMEA reçu par le Stick GPS et relance le Menu Principal si une erreur est detecte en testant la variable 'Validite'
+    if Validite == 'A' and Decimal_latitude_valid == True and Decimal_longitude_valid == True :   #Si la variable est valide alors...
         print(Validite)                 #Affichage de la Variable "Validite" dans la console
         print("Trame NMEA Valide")      #Affichage du String entre guillemet
         print("Signal GPS Obtenue")     #Affichage du String entre guillemet
-        pass #<--
+        print (system_time)
+        pass #<--   
+    
 
-    else :                              #Sinon alors...
+    elif Validite == None or Decimal_latitude == None or Decimal_longitude == None  : #Sinon alors...
+        print("elif Variables == None")
+        print("Variables Non Utilisable")                           #Affichage du String entre guillemet
+        print("Signal GPS Perdue")                                  #Affichage du String entre guillemet
+        print("Redemarrage en cours du Programme MENU PRINCIPAL")
+        print (system_time)
+
+        #DOT3K CHECK ERROR DISPLAY --DEBUT--
+        lcd.clear()                         #Nettoyage de la Zone Affichable
+
+        lcd.set_cursor_position(0,0)        #Positionnement du Curseur à la colonne 0 et ligne 0
+        lcd.write("CHECKING VAR")           #Affichage du String entre guillemet
+        
+        lcd.set_cursor_position(0,1)        #Positionnement du Curseur à la colonne 0 et ligne 1
+        lcd.write(system_time)              #Affichage du String entre guillemet
+
+        lcd.set_cursor_position(0,2)        #Positionnement du Curseur à la colonne 0 et ligne 1
+        lcd.write("Restart!!!")             #Affichage du String entre guillemet
+        #DOT3K CHECK ERROR DISPLAY --FIN--
+        
+        #Execution du fichier MENU 'dot3k_automenu.py'
+        time.sleep(5)
+        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
+
+    elif Decimal_latitude_valid == False : #Sinon alors...
+        print("elif Decimal_latitude_valid == False ")
+        print("Variables Non Utilisable")                           #Affichage du String entre guillemet
+        print("Signal GPS Perdue")                                  #Affichage du String entre guillemet
+        print("Redemarrage en cours du Programme MENU PRINCIPAL")
+        print (system_time)
+
+        #DOT3K CHECK ERROR DISPLAY --DEBUT--
+        lcd.clear()                         #Nettoyage de la Zone Affichable
+
+        lcd.set_cursor_position(0,0)        #Positionnement du Curseur à la colonne 0 et ligne 0
+        lcd.write("CHECKING VAR")           #Affichage du String entre guillemet
+        
+        lcd.set_cursor_position(0,1)        #Positionnement du Curseur à la colonne 0 et ligne 1
+        lcd.write(system_time)              #Affichage du String entre guillemet
+
+        lcd.set_cursor_position(0,2)        #Positionnement du Curseur à la colonne 0 et ligne 1
+        lcd.write("Restart!!!")             #Affichage du String entre guillemet
+        #DOT3K CHECK ERROR DISPLAY --FIN--
+        
+        #Execution du fichier MENU 'dot3k_automenu.py'
+        time.sleep(5)
+        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
+
+    elif Decimal_longitude_valid == False  : #Sinon alors...
+        print("elif Decimal_longitude_valid == False ")
+        print("Variables Non Utilisable")                           #Affichage du String entre guillemet
+        print("Signal GPS Perdue")                                  #Affichage du String entre guillemet
+        print("Redemarrage en cours du Programme MENU PRINCIPAL")
+        print (system_time)
+
+        #DOT3K CHECK ERROR DISPLAY --DEBUT--
+        lcd.clear()                         #Nettoyage de la Zone Affichable
+
+        lcd.set_cursor_position(0,0)        #Positionnement du Curseur à la colonne 0 et ligne 0
+        lcd.write("CHECKING VAR")           #Affichage du String entre guillemet
+        
+        lcd.set_cursor_position(0,1)        #Positionnement du Curseur à la colonne 0 et ligne 1
+        lcd.write(system_time)              #Affichage du String entre guillemet
+
+        lcd.set_cursor_position(0,2)        #Positionnement du Curseur à la colonne 0 et ligne 1
+        lcd.write("Restart!!!")             #Affichage du String entre guillemet
+        #DOT3K CHECK ERROR DISPLAY --FIN--
+        
+        #Execution du fichier MENU 'dot3k_automenu.py'
+        time.sleep(5)
+        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
+ 
+    else :                                                  #Sinon alors...
+        print("else conditions")
         print(Validite)                                     #Affichage de la Variable "Validite" dans la console
         print("Trame NMEA NON VALIDE")                      #Affichage du String entre guillemet
         print("Signal GPS Perdue")                          #Affichage du String entre guillemet
         print("Redemarrage en cours du Programme MENU PRINCIPAL")
+        print (system_time)
 
         #DOT3K CHECK ERROR DISPLAY --DEBUT--
-        lcd.clear()                     #Nettoyage de la Zone Affichable
+        lcd.clear()                         #Nettoyage de la Zone Affichable
 
-        lcd.set_cursor_position(0,0)    #Positionnement du Curseur à la colonne 0 et ligne 0
-        lcd.write("Trame NON VALIDE")   #Affichage du String entre guillemet
+        lcd.set_cursor_position(0,0)        #Positionnement du Curseur à la colonne 0 et ligne 0
+        lcd.write(system_time)              #Affichage du String entre guillemet
         
-        lcd.set_cursor_position(0,1)    #Positionnement du Curseur à la colonne 0 et ligne 1
-        lcd.write("Signal GPS Perdue")  #Affichage du String entre guillemet
+        lcd.set_cursor_position(0,1)        #Positionnement du Curseur à la colonne 0 et ligne 1
+        lcd.write("Signal GPS Perdue")      #Affichage du String entre guillemet
 
         lcd.set_cursor_position(0,2)        #Positionnement du Curseur à la colonne 0 et ligne 1
         lcd.write("Restart en cours...")    #Affichage du String entre guillemet        
@@ -108,7 +203,7 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
 
         #Execution du fichier MENU 'dot3k_automenu.py'
         time.sleep(13)
-        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--            
+        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
 
 #-------------------------------
 
@@ -155,9 +250,9 @@ def determine():
 #-------------------------------
 #NOUS INDICONS UNIQUEMENT LA VILLE ICI
 def determine_less():
-    gmaps = googlemaps.Client(key='AIzaSyCbcLmcGDUQlhvZhAkdE0IUFh90rjJ7rrw') #Cle d'acces A.P.I
-
     etat_trame() #Validation de la conformite de la Trame NMEA <--
+    
+    gmaps = googlemaps.Client(key='AIzaSyCbcLmcGDUQlhvZhAkdE0IUFh90rjJ7rrw') #Cle d'acces A.P.I    
 
 # Look up an address with reverse geocoding
     reverse_geocode_result = gmaps.reverse_geocode((Decimal_latitude, Decimal_longitude)) #Envoie et Recuperation des Donnees
@@ -195,6 +290,7 @@ def main():
         
         print(Decimal_latitude)  #AFFICHAGE DE LA VARIABLE CONVERTIS LATITUDE
         print(Decimal_longitude) #AFFICHAGE DE LA VARIABLE CONVERTIS LONGITUDE
+        etat_trame() #Validation de la conformite de la Trame NMEA <--
         determine(); #FONCTION PERMETTANT DE DETERMINER LA LOCALISATION GRACE AU G.P.S
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-﻿Pour que ce projet fonctionne on a besoin : 
+Pour que ce projet fonctionne on a besoin : 
 
 HARDWARE :	
 
@@ -20,7 +20,7 @@ SOFTWARE :
 		-json
 		-googlemaps (API GOOGLEMAPS pip install -U googlemaps)
 		-datetime
-		-pyowm (API METEO)
+		-pyowm (API METEO // pip install pyowm)
 
 	- Raspian Wheezy/Strentch ou ultérieur
 	
