@@ -130,7 +130,7 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
         
         #Execution du fichier MENU 'dot3k_automenu.py'
         time.sleep(5)
-        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
+        os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
 
     elif Decimal_latitude_valid == False : #Sinon alors...
         print("elif Decimal_latitude_valid == False ")
@@ -154,7 +154,7 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
         
         #Execution du fichier MENU 'dot3k_automenu.py'
         time.sleep(5)
-        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
+        os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
 
     elif Decimal_longitude_valid == False  : #Sinon alors...
         print("elif Decimal_longitude_valid == False ")
@@ -178,7 +178,7 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
         
         #Execution du fichier MENU 'dot3k_automenu.py'
         time.sleep(5)
-        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
+        os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
  
     else :                                                  #Sinon alors...
         print("else conditions")
@@ -203,7 +203,7 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
 
         #Execution du fichier MENU 'dot3k_automenu.py'
         time.sleep(13)
-        os.system('python dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
+        os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
 
 #-------------------------------
 
