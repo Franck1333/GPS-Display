@@ -31,3 +31,25 @@ Display'O'Tron 3000
 	- Repertoire 'utils'
 	- Fichier 'dot3k.cfg'
 	- Repertoire 'library'
+_____________________________________________________________________________________________________________________________
+Voici les différents fichiers utiles dans le dossier /Mon_Travail/ :
+
+Start_GPS.sh : Permet de Lancer le Projet dans son entierté
+
+Recuperation_GPS.py : Permet d'afficher les information reçu du Stick GPS en Anglais
+
+Recuperation_FR_GPS.py : Permet d'afficher les information reçu du Stick GPS en Français
+
+Recuperation_Determination.py : Permet de Recuperer les informations reçu provenant du Stick GPS et Determiné où nous sommes puis d'agir en conséquence des résultats
+
+Meteo.py : Traitement des Coordonées GPS pour obtenir la Météo local en temps réel
+
+dot3k_clear.py : Efface la Zone affichable du DOT3K
+
+dot3k_automenu.py : Menu Principal pour le projet et l'utilisation du DOT3K
+
+dot3k_affichage_meteo.py : Traitement de l'affichage des données recuperer et determine par le Fichier Meteo.py
+
+dot3k_affichage_determination : Traitement de l'affichage des données recuperer et determine par le Fichier Recuperation_Determination.py
+
+dot3k.cfg : Fichier de Configuration de l'afficheur DOT3K 

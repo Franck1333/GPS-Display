@@ -18,6 +18,7 @@ import googlemaps #pip install -U googlemaps
 import datetime
 
 import dot3k.lcd as lcd
+import dot3k.backlight as backlight
 
 #---DEBUT---Variables Par Défault---
 Validite = None
@@ -101,6 +102,18 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
 
     #Cette fonction va verifie la conformite de la Trame NMEA reçu par le Stick GPS et relance le Menu Principal si une erreur est detecte en testant la variable 'Validite'
     if Validite == 'A' and Decimal_latitude_valid == True and Decimal_longitude_valid == True :   #Si la variable est valide alors...
+
+        #Lumière -- DEBUT --
+        print("Affichage VERT")
+        backlight.rgb(0, 255, 0)    #Paramètre RGB Lumiere
+        #Lumière -- FIN --
+
+        #PARAMETRAGE BARGRAPH --DEBUT--
+        for i in range(13):
+            backlight.set_graph(i / 13.0)
+        time.sleep(0.05)
+        #PARAMETRAGE BARGRAPH --FIN--
+        
         print(Validite)                 #Affichage de la Variable "Validite" dans la console
         print("Trame NMEA Valide")      #Affichage du String entre guillemet
         print("Signal GPS Obtenue")     #Affichage du String entre guillemet
@@ -109,6 +122,12 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
     
 
     elif Validite == None or Decimal_latitude == None or Decimal_longitude == None  : #Sinon alors...
+
+        #Lumière -- DEBUT --
+        print("Affichage JAUNE")
+        backlight.rgb(255, 255, 0)    #Paramètre RGB Lumiere
+        #Lumière -- FIN --
+
         print("elif Variables == None")
         print("Variables Non Utilisable")                           #Affichage du String entre guillemet
         print("Signal GPS Perdue")                                  #Affichage du String entre guillemet
@@ -133,6 +152,12 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
         os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
 
     elif Decimal_latitude_valid == False : #Sinon alors...
+
+        #Lumière -- DEBUT --
+        print("Affichage ROUGE")
+        backlight.rgb(255, 0, 0)    #Paramètre RGB Lumiere
+        #Lumière -- FIN --
+
         print("elif Decimal_latitude_valid == False ")
         print("Variables Non Utilisable")                           #Affichage du String entre guillemet
         print("Signal GPS Perdue")                                  #Affichage du String entre guillemet
@@ -157,6 +182,12 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
         os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
 
     elif Decimal_longitude_valid == False  : #Sinon alors...
+        
+        #Lumière -- DEBUT --
+        print("Affichage ROUGE")
+        backlight.rgb(255, 0, 0)    #Paramètre RGB Lumiere
+        #Lumière -- FIN --
+
         print("elif Decimal_longitude_valid == False ")
         print("Variables Non Utilisable")                           #Affichage du String entre guillemet
         print("Signal GPS Perdue")                                  #Affichage du String entre guillemet
@@ -181,6 +212,12 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
         os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
  
     else :                                                  #Sinon alors...
+        
+        #Lumière -- DEBUT --
+        print("Affichage BLANC + JAUNE")
+        backlight.rgb(255, 255, 245)    #Paramètre RGB Lumiere
+        #Lumière -- FIN --
+
         print("else conditions")
         print(Validite)                                     #Affichage de la Variable "Validite" dans la console
         print("Trame NMEA NON VALIDE")                      #Affichage du String entre guillemet
