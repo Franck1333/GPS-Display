@@ -1,11 +1,14 @@
 # GPS-Display
 This project aims to use Satellite's Data (GPS) to determine a High precice localization and do more stuff with that .
+
 ## Getting Started
 To get a copy of the project , you can go on the GitHub's webpage of the project and click on the green button to download as a .ZIP file.
 However , if you're using a prompt on a unix machine use this line :
 ```
 git clone https://github.com/Franck1333/GPS-Display.git
 ```
+However , before doing anything  , you should check updates of your platform before Install and Run this project , it's recommended ;=).
+
 ### Prerequisites
 To use the project , you will need some Hardware:
 ```
@@ -45,7 +48,20 @@ Now especially for the Display'O'Tron 3000 in our case
   
   ### Installing
   To get and install the files , use this line : git clone https://github.com/Franck1333/GPS-Display.git
-  
+ 
+ ### NEED TO BE INSTALL BEFORE RUNNING
+ #### The Weather API :
+	  ```
+	  sudo pip install pyowm
+	  ```
+ #### The Google Maps API :
+	  ```
+	  sudo pip install -U googlemaps
+	  ```
+ #### The Display'O'Tron Softwares and libs :
+	  ```
+	  curl -sS get.pimoroni.com/displayotron | bash
+	  ``` 
   ### RUN
   #### First Way to run the project : 
   To run the project , you can run the small script file called "Start_GPS.sh" ; it's will launch the project in the background
@@ -101,3 +117,4 @@ Now especially for the Display'O'Tron 3000 in our case
   ## Authors
 
 * **Franck ROCHAT** - *Initial work* - [Franck ROCHAT](https://github.com/Franck1333)
+Thank You ! :heart:
