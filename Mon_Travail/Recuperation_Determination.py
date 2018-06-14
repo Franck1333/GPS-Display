@@ -20,6 +20,8 @@ import datetime
 import dot3k.lcd as lcd
 import dot3k.backlight as backlight
 
+from nettoyage_du_cache import clear_cache
+
 #---DEBUT---Variables Par Défault---
 Validite = None
 Decimal_latitude = None
@@ -149,6 +151,7 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
         
         #Execution du fichier MENU 'dot3k_automenu.py'
         time.sleep(5)
+        clear_cache()                       #Nettoyage des Fichiers caches PYTHON
         os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
 
     elif Decimal_latitude_valid == False : #Sinon alors...
@@ -179,6 +182,7 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
         
         #Execution du fichier MENU 'dot3k_automenu.py'
         time.sleep(5)
+        clear_cache()                       #Nettoyage des Fichiers caches PYTHON
         os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
 
     elif Decimal_longitude_valid == False  : #Sinon alors...
@@ -209,6 +213,7 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
         
         #Execution du fichier MENU 'dot3k_automenu.py'
         time.sleep(5)
+        clear_cache()                       #Nettoyage des Fichiers caches PYTHON
         os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
  
     else :                                                  #Sinon alors...
@@ -240,6 +245,7 @@ def etat_trame(): #Verification de la conformite de la Trame NMEA reçu
 
         #Execution du fichier MENU 'dot3k_automenu.py'
         time.sleep(13)
+        clear_cache()                       #Nettoyage des Fichiers caches PYTHON
         os.system('sudo python /home/pi/GPS_Display/Mon_Travail/dot3k_automenu.py') #Redemarre le Menu et les fonctions dans le Menu avec <--
 
 #-------------------------------

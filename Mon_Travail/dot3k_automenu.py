@@ -19,10 +19,11 @@ while True:
     """)
     
     #print("Nettoyage de Printemps des Fichiers caches du Projet")
-    clear_cache()
     
     time.sleep(13)
     determination_dot3k()
     time.sleep(13)
     meteo_dot3k()
     time.sleep(1)
+    clear_cache()
+    time.sleep(3)
