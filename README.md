@@ -64,7 +64,7 @@ Now especially for the Display'O'Tron 3000 in our case
   >> bash /home/pi/GPS_Display/Mon_Travail/Start_GPS.sh &
   ```
   ## Running the tests
-  To test if I received a GPS signals , i used the python files called :
+  To test if you received a GPS signals , you have to use the python files called :
   ```
   Recuperation_GPS.py (English Ver)
   Recuperation_FR_GPS.py (French Ver)
@@ -94,7 +94,7 @@ Now especially for the Display'O'Tron 3000 in our case
 
   dot3k_affichage_meteo.py : Processing of the data display that had been get and determinated by the python file called "Meteo.py"
 
-  dot3k_affichage_determination : Processing of the display of the data come from the python file called "Recuperation_Determination.py"
+  dot3k_affichage_determination.py : Processing of the display of the data come from the python file called "Recuperation_Determination.py"
 
   dot3k.cfg : Configuration file for the DOT3K display 
   ```
