@@ -85,6 +85,8 @@ Now especially for the Display'O'Tron 3000 in our case
   Recuperation_Determination.py : Allow to get information come from the GPS USB stick and determinate where we are and what to do with variables states
 
   Meteo.py : Processing of GPS coordinates to get the local weather in real time
+  
+  nettoyage_du_cache.py : Delete the Python Cache files (*.pyc)
 
   dot3k_clear.py : Delete the diplayable area of the DOT3K
 
